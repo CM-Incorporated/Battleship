@@ -1,7 +1,50 @@
-!<DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Counters</title>
+</head>
+<body>
+    <h1>Counter App</h1>
 
-<html> 
+    <div>
+        <p>Counter Zero: <span id="counter0">0</span></p>
+        <button onclick="updateCounter('0')">Increment Zero</button>
+    </div>
 
-	<h1> Hello Slop </h1>
+    <div>
+        <p>Counter One: <span id="counter1">0</span></p>
+        <button onclick="updateCounter('1')">Increment One</button>
+    </div>
 
+    <br>
+    <button onclick="loadCounters()">Refresh Counters</button>
+
+    <script>
+        async function loadCounters() {
+            const response = await fetch("/counters");
+            const data = await response.json();
+
+            data.forEach(counter => {
+                if (counter.id === "0") {
+                    document.getElementById("counter0").textContent = counter.value;
+                }
+                if (counter.id === "1") {
+                    document.getElementById("counter1").textContent = counter.value;
+                }
+            });
+        }
+
+        async function updateCounter(id) {
+            await fetch(`/counters/${id}`, {
+                method: "PUT"
+            });
+
+            loadCounters();
+        }
+
+        // Load values when page opens
+        loadCounters();
+    </script>
+</body>
 </html>

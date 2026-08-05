@@ -1,0 +1,3 @@
+module cmincorporated.com/client
+
+go 1.26.5

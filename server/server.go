@@ -37,7 +37,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("Main loop error")
 			return
 		}
-		log.Printf("received: %v", v)
+		log.Printf("received from %s: %v", r.RemoteAddr, v)
 	}
 
 	c.Close(websocket.StatusNormalClosure, "")

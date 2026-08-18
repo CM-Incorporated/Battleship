@@ -5,6 +5,8 @@ import (
 	"log"
 	"time"
 
+	_ "cmincorporated.com/protocol"
+
 	"github.com/coder/websocket"
 	"github.com/coder/websocket/wsjson"
 )

@@ -2,6 +2,12 @@ module cmincorporated.com/server
 
 go 1.26.5
 
-replace cmincorporated.com/gamecode => ../gamecode
+replace (
+	cmincorporated.com/gamecode => ../gamecode
+	cmincorporated.com/protocol => ../protocol
+)
 
-require github.com/coder/websocket v1.8.15
+require (
+	cmincorporated.com/protocol v0.0.0
+	github.com/coder/websocket v1.8.15
+)

@@ -12,6 +12,7 @@ func PlaceShips(seed int64) (protocol.Board, []protocol.Ship) {
 }
 
 func canPlace(protocol.Board, protocol.Coord) bool {
+	// check if a ship can be placed at a specific location
 	fmt.Printf("Yo")
 	return true
 }

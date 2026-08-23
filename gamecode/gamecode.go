@@ -16,3 +16,7 @@ func canPlace(protocol.Board, protocol.Coord) bool {
 	fmt.Printf("Yo")
 	return true
 }
+
+func checkShipPlacementValid(protocol.Coord) bool {
+	return true
+}

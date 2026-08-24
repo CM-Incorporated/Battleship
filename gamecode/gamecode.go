@@ -1,10 +1,19 @@
 package gamecode
 
 import (
-	"math/rand/v2"
+	"context"
+	"fmt"
+	"log"
+	"net/http"
+	"time"
 
-	"cmincorporated.com/protocol"
+	"github.com/coder/websocket"
+	"github.com/coder/websocket/wsjson"
+  "cmincorporated.com/protocol"
 )
+
+var game_id string
+var working bool
 
 const maxAttemptsPerShip = 100
 
@@ -90,4 +99,34 @@ func markShip(board *protocol.Board, cells []protocol.Coord) {
 
 func inBound(c protocol.Coord) bool {
 	return c.Row >= 0 && c.Row < protocol.GridSize && c.Col >= 0 && c.Col < protocol.GridSize
+}
+
+func NewGame(c *websocket.Conn, err error, r *http.Request) {
+
+	defer c.CloseNow()
+	// Set the context as needed. Use of r.Context() is not recommended
+	// to avoid surprising behavior (see http.Hijacker).
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+
+	var v any
+	err = wsjson.Read(ctx, c, &v)
+	if err != nil {
+		fmt.Println("First read error")
+		return
+	}
+	log.Printf("received: %v", v)
+
+	for v != "close" {
+		err = wsjson.Read(ctx, c, &v)
+		if err != nil {
+			fmt.Println("Main loop error")
+			return
+		}
+		log.Printf("received from %s: %v", r.RemoteAddr, v)
+	}
+
+	
+
+	c.Close(websocket.StatusNormalClosure, "")
 }

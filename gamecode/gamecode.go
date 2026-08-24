@@ -81,3 +81,13 @@ func canPlace(board *protocol.Board, cells []protocol.Coord) bool {
 	}
 	return true
 }
+
+func markShip(board *protocol.Board, cells []protocol.Coord) {
+	for _, c := range cells {
+		board[c.Row][c.Col] = protocol.CellShip
+	}
+}
+
+func inBound(c protocol.Coord) bool {
+	return c.Row >= 0 && c.Row < protocol.GridSize && c.Col >= 0 && c.Col < protocol.GridSize
+}

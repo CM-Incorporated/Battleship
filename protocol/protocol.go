@@ -107,7 +107,7 @@ func (t ShipType) Length() int {
 	case Submarine:
 		return 2
 	default:
-		return 0
+		panic("Unknown Ship Type")
 	}
 }
 

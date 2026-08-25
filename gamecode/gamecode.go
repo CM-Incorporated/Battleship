@@ -4,12 +4,13 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"math/rand/v2"
 	"net/http"
 	"time"
 
+	"cmincorporated.com/protocol"
 	"github.com/coder/websocket"
 	"github.com/coder/websocket/wsjson"
-  "cmincorporated.com/protocol"
 )
 
 var game_id string
@@ -125,8 +126,6 @@ func NewGame(c *websocket.Conn, err error, r *http.Request) {
 		}
 		log.Printf("received from %s: %v", r.RemoteAddr, v)
 	}
-
-	
 
 	c.Close(websocket.StatusNormalClosure, "")
 }

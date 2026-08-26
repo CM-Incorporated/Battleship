@@ -1,6 +1,8 @@
 package protocol
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 const GridSize = 10
 
@@ -90,6 +92,23 @@ type ErrorResponse struct {
 	Type    string `json:"type"`
 	Code    int    `json:"code"`
 	Message string `json:"message"`
+}
+
+var AllShipTypes = []ShipType{Carrier, Battleship, Destroyer, Cruiser, Submarine}
+
+func (t ShipType) Length() int {
+	switch t {
+	case Carrier:
+		return 5
+	case Battleship:
+		return 4
+	case Destroyer, Cruiser:
+		return 3
+	case Submarine:
+		return 2
+	default:
+		panic("Unknown Ship Type")
+	}
 }
 
 func TypeOf(data []byte) (string, error) {

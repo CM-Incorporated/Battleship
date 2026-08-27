@@ -1,11 +1,15 @@
 module cmincorporated.com/demo
 
-go 1.26.3
+go 1.26.5
 
-replace cmincorporated.com/gamecode => ./gamecode
+replace (
+	cmincorporated.com/gamecode => ../gamecode
+	cmincorporated.com/protocol => ../protocol
+)
 
-replace cmincorporated.com/client => ./client
+require (
+	cmincorporated.com/gamecode v0.0.0-00010101000000-000000000000
+	cmincorporated.com/protocol v0.0.0
+)
 
-replace cmincorporated.com/server => ./server
-
-replace cmincorporated.com/protocol => ./protocol
+require github.com/coder/websocket v1.8.15 // indirect

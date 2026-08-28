@@ -23,8 +23,8 @@ func main() {
 		fmt.Printf("  %-11s len=%d sunk=%v cells=%v\n", shipName(s.Type), s.Type.Length(), s.Sunk, s.Cells)
 	}
 
-	dumpJSON("Board", board)
-	dumpJSON("Ships", ships)
+	//dumpJSON("Board", board)
+	//dumpJSON("Ships", ships)
 }
 
 func parseSeed() int64 {

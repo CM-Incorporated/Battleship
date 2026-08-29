@@ -38,15 +38,6 @@ func parseSeed() int64 {
 	return time.Now().UnixNano()
 }
 
-func dumpJSON(label string, v any) {
-	b, err := json.MarshalIndent(v, "", "  ")
-	if err != nil {
-		fmt.Printf("\n%s (JSON error: %v)\n", label, err)
-		return
-	}
-	fmt.Printf("\n%s (JSON):\n%s\n", label, b)
-}
-
 func shipName(t protocol.ShipType) string {
 	switch t {
 	case protocol.Carrier:

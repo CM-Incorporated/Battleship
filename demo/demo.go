@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"strconv"
@@ -79,14 +78,14 @@ func printBoard(board protocol.Board, ships []protocol.Ship) {
 	}
 
 	fmt.Print("\n     ")
-	for c := 0; c < protocol.GridSize; c++ {
+	for c := range protocol.GridSize {
 		fmt.Printf("%d ", c)
 	}
 	fmt.Println()
 
-	for r := 0; r < protocol.GridSize; r++ {
+	for r := range protocol.GridSize {
 		fmt.Printf("%2d | ", r)
-		for c := 0; c < protocol.GridSize; c++ {
+		for c := range protocol.GridSize {
 			coord := protocol.Coord{Row: r, Col: c}
 			if ch, ok := mark[coord]; ok {
 				fmt.Printf("%c ", ch)

@@ -20,9 +20,9 @@ func main() {
 	}
 	defer c.CloseNow()
 
-	for i := 0; i < 50; i++ {
+	for i := 0; i < 10; i++ {
 
-		err = wsjson.Write(ctx, c, i)
+		err = wsjson.Write(ctx, c, "hello")
 		if err != nil {
 			log.Fatal("Oh god")
 		}

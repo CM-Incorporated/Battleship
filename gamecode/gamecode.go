@@ -1,16 +1,10 @@
 package gamecode
 
 import (
-	"context"
 	"fmt"
-	"log"
 	"math/rand/v2"
-	"net/http"
-	"time"
 
 	"cmincorporated.com/protocol"
-	"github.com/coder/websocket"
-	"github.com/coder/websocket/wsjson"
 )
 
 var game_id string
@@ -102,30 +96,14 @@ func inBound(c protocol.Coord) bool {
 	return c.Row >= 0 && c.Row < protocol.GridSize && c.Col >= 0 && c.Col < protocol.GridSize
 }
 
-func NewGame(c *websocket.Conn, err error, r *http.Request) {
-
-	defer c.CloseNow()
-	// Set the context as needed. Use of r.Context() is not recommended
-	// to avoid surprising behavior (see http.Hijacker).
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
-	defer cancel()
-
-	var v any
-	err = wsjson.Read(ctx, c, &v)
-	if err != nil {
-		fmt.Println("First read error")
-		return
-	}
-	log.Printf("received: %v", v)
-
-	for v != "close" {
-		err = wsjson.Read(ctx, c, &v)
-		if err != nil {
-			fmt.Println("Main loop error")
-			return
+func NewGame(p1 chan string, p2 chan string) {
+	fmt.Println("New game Launched")
+	for true {
+		select {
+		case msg1 := <-p1:
+			fmt.Println("Player 1 sent: ", msg1)
+		case msg2 := <-p2:
+			fmt.Println("Player 2 sent: ", msg2)
 		}
-		log.Printf("received from %s: %v", r.RemoteAddr, v)
 	}
-
-	c.Close(websocket.StatusNormalClosure, "")
 }

@@ -21,9 +21,6 @@ func main() {
 	for _, s := range ships {
 		fmt.Printf("  %-11s len=%d sunk=%v cells=%v\n", shipName(s.Type), s.Type.Length(), s.Sunk, s.Cells)
 	}
-
-	//dumpJSON("Board", board)
-	//dumpJSON("Ships", ships)
 }
 
 func parseSeed() int64 {
